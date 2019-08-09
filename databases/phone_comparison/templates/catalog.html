@@ -3,9 +3,38 @@
 
 {% block title %}Каталог{% endblock %}
 {% block content %}
+{% load new_filters %}
     <div class="container">
         <div class="header">
             <h1>Сравнение телефонов</h1>
+            <div class="row", style="padding: 10px;">
+                <div class="col", style="padding: 20px;">
+                    <p>Модель</p>
+                    <p>Производитель</p>
+                    <p>Цена</p>
+                    <p>Операционная система</p>
+                    <p>Процессор</p>
+                    <p>Кол-во ядер</p>
+                    <p>Встроенная память</p>
+                    <p>Разрешение экрана</p>
+                    <p>Две камеры</p>
+                    <p>Батарея</p>
+                </div>
+                {% for phone in phones %}
+                <div class="col", style="padding: 20px;">
+                    <p><b>{{ phone.model_name|replace_empty }}</b></p>
+                    <p>{{ phone.producer|replace_empty }}</p>
+                    <p>{{ phone.cost|replace_empty }}</p>
+                    <p>{{ phone.operation_system|replace_empty }}</p>
+                    <p>{{ phone.ram|replace_empty }}</p>
+                    <p>{{ phone.core|replace_empty }}</p>
+                    <p>{{ phone.memory|replace_empty }}</p>
+                    <p>{{ phone.display_definition|replace_empty }}</p>
+                    <p>{{ phone.double_camera|replace_empty|replace_bool }}</p>
+                    <p>{{ phone.battery|replace_empty }}</p>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
