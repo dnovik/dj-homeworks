@@ -31,7 +31,7 @@
           {% for rows in values %}
           <tr>
               {% for row in rows %}
-                  {% if rows|last == row%}
+                  {% if rows|last == row %}
                     <td style="background: rgba(128, 128, 128, 0.787)">{{ row }}</td>
                   {% elif row < 0 %}
                     <td style="background: green">{{ row }}</td>
