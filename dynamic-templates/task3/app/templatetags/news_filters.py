@@ -11,9 +11,9 @@ def format_date(value):
     formated_date = datetime.fromtimestamp(int(value))
     now = datetime.now()
     delta = now - formated_date
-    if delta.seconds < 600:
+    if delta.seconds <= 600:
         post_date = 'Только что'
-    elif delta.seconds < 86400:
+    elif delta.seconds <= 86400:
         post_date = f'{int(delta.seconds / 60 / 60)} часов назад'
     else:
         post_date = formated_date
@@ -21,9 +21,9 @@ def format_date(value):
 
 @register.filter
 def format_score(value):
-    if value < -5:
+    if value <= -5:
         rate = 'Очень низкий рейтинг'
-    elif value < 5:
+    elif value <= 5:
         rate = 'Средний рейтинг'
     elif value > 5:
         rate = 'Высокий рейтинг'
@@ -37,13 +37,18 @@ def format_score(value):
 def format_num_comments(value):
     if value == 0:
         comments = 'Оставьте комментарий'
-    elif value > 0 and value < 50:
+    elif value >= 0 and value < 50:
         comments = value
-    elif value > 50:
+    elif value >= 50:
         comments = '50+'
     return comments
 
 @register.filter
 def format_selftext(value, count):
     value = value.split(' ')
-    return ' '.join(value[:count]) + '...'
+    if len(value) < count * 2:
+        description = 'Thers is no article description...'
+    else:
+        description =  ' '.join(value[:count]) + '...' + ' '.join(value[-count:])
+
+    return description
