@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
-
-{% block title %}Каталог книг{% endblock %}
+{% block title %}{{ book.name }}{% endblock %}
 {% block content %}
     <div class="container">
         <div class="header">
@@ -9,12 +7,15 @@
         </div>
         <div class="row">
             <div class="book col-md-4">
-                {% for book in books %}
-                    <h2><a href="{{ book.pub_date }}">{{ book.name }}</a></h2>
+                    <h2>{{ book.name }}</h2>
                     <p>Автор: {{ book.author }}</p>
                     <p>Дата публикации: {{ book.pub_date }}</p>
-                {% endfor %}
             </div>
+        <div class="row">
+            <p>{{ next_page }}</p>
+            <p></p>
+            <p>{{ prev_page }}</p>
+        </div>
         </div>
     </div>
 {% endblock %}
