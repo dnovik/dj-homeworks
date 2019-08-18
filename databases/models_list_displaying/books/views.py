@@ -12,6 +12,7 @@ def books_view(request):
     for book in book_set:
         book.pub_date =  date_converter.to_url(book.pub_date)
     context = {'books' : book_set}
+    print(book_set)
 
     return render(request, template, context)
 
@@ -25,15 +26,30 @@ def view_book(request, date):
     pagination = Paginator(date_list, 1)
     book = Book.objects.get(pub_date=date)
     book.pub_date = date_converter.to_url(book.pub_date)
-    current_date = request.path.split('/')[2]
-    current_page = page.page()
-    print(date_list.index(current_date))
+
+    if date_list.index(book.pub_date) <= 0:
+        current_page = 1
+    else:
+        current_page = date_list.index(book.pub_date) + 1
     
+    page_object = pagination.page(current_page)
+
+    if page_object.has_next():
+        next_date = pagination.page(page_object.next_page_number()).object_list[0]
+    else:
+        next_date = ''
+
+    if page_object.has_previous():
+        prev_date = pagination.page(page_object.previous_page_number()).object_list[0]
+    else:
+        prev_date = ''
+
+
     context = {
         'book' : book,
-        'next_page' : page,
-        'prev_page' : page}
+        'next_date' : next_date,
+        'prev_date' : prev_date
+        }
 
     return render(request, template, context)
             
-methods = ['COOKIES', 'FILES', 'GET', 'META', 'POST', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_encoding', '_get_post', '_get_raw_host', '_get_scheme', '_initialize_handlers', '_load_post_and_files', '_mark_post_parse_error', '_messages', '_post_parse_error', '_read_started', '_set_post', '_stream', '_upload_handlers', 'body', 'build_absolute_uri', 'close', 'content_params', 'content_type', 'csrf_processing_done', 'encoding', 'environ', 'get_full_path', 'get_host', 'get_port', 'get_raw_uri', 'get_signed_cookie', 'is_ajax', 'is_secure', 'method', 'parse_file_upload', 'path', 'path_info', 'read', 'readline', 'readlines', 'resolver_match', 'scheme', 'session', 'upload_handlers', 'user', 'xreadlines']

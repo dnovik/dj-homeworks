@@ -4,17 +4,31 @@
     "pk": 1,
     "fields": {
       "name": "Война и мир",
-      "author": "Ф.Д. Достоевский",
+      "author": "Л.Н. Толстой",
       "pub_date": "2018-02-27"
-    }
-  },
-  {
+    }},
+    {
     "model": "books.book",
     "pk": 2,
     "fields": {
       "name": "1984",
       "author": "Джордж Оруэл",
       "pub_date": "2016-12-06"
-    }
-  }
+    }},
+  {
+    "model": "books.book",
+    "pk": 3,
+    "fields": {
+      "name": "100500+",
+      "author": "Джордж Оруэл",
+      "pub_date": "2017-12-06"
+    }},
+  {
+    "model": "books.book",
+    "pk": 4,
+    "fields": {
+      "name": "Шутки за 200",
+      "author": "Интеллектуал",
+      "pub_date": "2019-12-06"
+    }}
 ]

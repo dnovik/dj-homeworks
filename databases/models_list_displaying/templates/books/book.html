@@ -11,11 +11,14 @@
                     <p>Автор: {{ book.author }}</p>
                     <p>Дата публикации: {{ book.pub_date }}</p>
             </div>
+        </div>
         <div class="row">
-            <p>{{ next_page }}</p>
-            <p></p>
-            <p>{{ prev_page }}</p>
+        <div class="col-md-2">
+            <p> <a href="/books/{{ prev_date }}"</a>{{ prev_date }}</p>
         </div>
+        <div class="col-md-4">
+            <p><a href="/books/{{ next_date }}"</a>{{ next_date }}</p>
         </div>
+         </div>
     </div>
 {% endblock %}
